@@ -22,16 +22,17 @@ function onSocketClose() {
   console.log("Disconneted from the browser") //서버 연결 중단시 메세지
 }
 
-function onSocketMessage(message){
-  console.log(message.toString())// 브라우저가 서버에 메시지를 보냈을때를 위한 리스너
-}
+const sockets = [] // 서버에 연결되면 들어가는곳 
 
 
 wss.on("connection", (socket) => { //소켓은 서버에 있는게 아니다.
-  console.log("Connetted to Browser") // 브라우저 연결
+  // console.log("Connetted to Browser") // 브라우저 연결
+  sockets.push(socket) // 예를 들어 firefox가 연결될때 firefox를 array에 넣어줌
   socket.on("close", onSocketClose) 
-  socket.on("message",onSocketMessage  ) 
-  socket.send("hello!!")
+  socket.on("message",(message) => {
+    sockets.forEach((aSocket) => aSocket.send(message.toString()))  //aSocket : 각 브라우저를 aSocket으로 표시하고 메시지를 보냄
+  }) 
+  // socket.send("hello!!")
 })
 
 server.listen(3000, handleListen)
