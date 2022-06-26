@@ -20,3 +20,9 @@ webSocet request -> webSocet accept -> webSocet connection closed
 서버에서 받으면 연결 성립 (서버가 유저를 기억 -> 서버가 답장가능)
 request, response 발생x
 양방향 연결이기에 서버가 유저에게, 유저가 서버에게 전송가능
+
+
+ws : 사용하기 편하고, 빠르고 클라이언트와 서버사이의 webSocet실행에서 검증됨
+
+protocol : 어떤 사람들이 어딘가에 있는 방에서 만나고 어떻게 일들이 진행될지 결정(어떻게 돌아가는지 규칙생성)
+프로그래머는 이 규칙을 기준으로 프로그램 생성

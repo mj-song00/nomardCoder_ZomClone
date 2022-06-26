@@ -1,4 +1,6 @@
 import express from "express"
+import http from "http"
+import {WebSocketServer}  from "ws"
 import path from "path"
 
 const app = express()
@@ -12,4 +14,8 @@ app.get("/*", (_, res) => res.redirect("/")) //아무 url입력해도 홈으로
 
 
 const handleListen = () => console.log(`Listeing on http://localhost:3000`)
-app.listen(3000, handleListen);
+
+const server = http.createServer(app)
+const wss = new WebSocketServer({server}) // http, websocket중 하나만 만들어도 됨다
+
+server.listen(3000, handleListen)
