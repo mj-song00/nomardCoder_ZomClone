@@ -28,9 +28,18 @@ const sockets = [] // 서버에 연결되면 들어가는곳
 wss.on("connection", (socket) => { //소켓은 서버에 있는게 아니다.
   // console.log("Connetted to Browser") // 브라우저 연결
   sockets.push(socket) // 예를 들어 firefox가 연결될때 firefox를 array에 넣어줌
+  socket["nickname"] = "Anon"
   socket.on("close", onSocketClose) 
-  socket.on("message",(message) => {
-    sockets.forEach((aSocket) => aSocket.send(message.toString()))  //aSocket : 각 브라우저를 aSocket으로 표시하고 메시지를 보냄
+  socket.on("message",(msg) => {
+    const message = JSON.parse(msg)
+    switch(message.type){
+      case "new_message":
+        sockets.forEach((aSocket) => 
+        aSocket.send(`${socket.nickname}: ${message.payload}`))  //aSocket : 각 브라우저를 aSocket으로 표시하고 메시지를 보냄
+      case "nickname":
+        socket["nickname"] = message.payload
+    }
+  
   }) 
   // socket.send("hello!!")
 })
