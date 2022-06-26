@@ -18,4 +18,10 @@ const handleListen = () => console.log(`Listeing on http://localhost:3000`)
 const server = http.createServer(app)
 const wss = new WebSocketServer({server}) // http, websocket중 하나만 만들어도 됨다
 
+function handleConnection(socket){
+  console.log(socket)
+}
+
+wss.on("connection", handleConnection )
+
 server.listen(3000, handleListen)
