@@ -16,12 +16,15 @@ app.get("/*", (_, res) => res.redirect("/")) //아무 url입력해도 홈으로
 const handleListen = () => console.log(`Listeing on http://localhost:3000`)
 
 const server = http.createServer(app)
-const wss = new WebSocketServer({server}) // http, websocket중 하나만 만들어도 됨다
+const wss = new WebSocketServer({server}) // http, websocket중 하나만 만들어도 된다.
 
-function handleConnection(socket){
-  console.log(socket)
-}
-
-wss.on("connection", handleConnection )
+wss.on("connection", (socket) => { //소켓은 서버에 있는게 아니다.
+  console.log("Connetted to Browser") // 브라우저 연결
+  socket.on("close", () => console.log("Disconneted from the browser")) //서버 연결 중단시 메세지
+  socket.on("message", message => {
+    console.log(message.toString())
+  }) // 브라우저가 서버에 메시지를 보냈을때를 위한 리스너
+  socket.send("hello!!")
+})
 
 server.listen(3000, handleListen)
