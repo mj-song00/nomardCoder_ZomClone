@@ -1,0 +1,22 @@
+http : request -> response -> request -> response의 반복 
+
+가장 중요한 점은 stateless(backend가 유저를 기억하지 못한다. 유저와 backend사이에 아무런 연결이 없기 때문)
+response를 주면 다음 request를 기다린다.
+서버는 유저를 잊고 누군인지 알려주는 cookie만 던진다
+즉) statelses는 서버가 접속자가 누군지 잊는것을 말함
+
+서버는 오직 request를 받을때만 답장(response) 
+하지만 실시간(real-time)으로 일어나지 않는다
+  1. 먼저 request를 보내여되고 
+  2. 서버가 아무것도 못한다. (서버가 말거는 일은 없다.)
+
+
+ => 이런게 http protocol 
+
+ webSocet protocol
+
+webSocet request -> webSocet accept -> webSocet connection closed
+웹소켓 연길이 일어나면 악수처럼 동작한다. (브라우저가 서버로 webSocet request를 보내면 서버에서 받거나 거절)
+서버에서 받으면 연결 성립 (서버가 유저를 기억 -> 서버가 답장가능)
+request, response 발생x
+양방향 연결이기에 서버가 유저에게, 유저가 서버에게 전송가능
