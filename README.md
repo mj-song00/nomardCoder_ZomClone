@@ -1,2 +1,3 @@
-# nomardCoder_ZomClone
-nomardCoder_ZomClone
+# Noom 
+
+Zoom Clone using Node.js,  WebRTC and Websockets.
